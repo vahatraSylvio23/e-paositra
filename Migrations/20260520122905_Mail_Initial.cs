@@ -87,6 +87,7 @@ namespace e_paositra.Migrations
                     FirstName = table.Column<string>(type: "text", nullable: true),
                     LastName = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
                     Password = table.Column<string>(type: "text", nullable: true),
                     Role = table.Column<string>(type: "text", nullable: true),
                     ServiceId = table.Column<int>(type: "integer", nullable: false)

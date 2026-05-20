@@ -1,4 +1,3 @@
-using Data;
 using Microsoft.AspNetCore.Mvc;
 using ViewModel;
 using e_paositra.Models;
@@ -7,27 +6,38 @@ using Repository;
 namespace e_paositra.Controllers;
 public class UserController : Controller
 {
-    private readonly MailDbContext _context;
     private readonly IUserRepository _userRepository;
-    public UserController( IUserRepository userRepository)
+
+    public UserController(IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }
 
-    public IActionResult login()
-    {
-        return View();
-    }
     [HttpGet]
-    public IActionResult register()
+    public IActionResult Login()
     {
         return View();
     }
-    [HttpPost]
-    public async Task<IActionResult> register(RegisterViewModel model)
+
+    [HttpGet]
+    public IActionResult Register()
     {
-        if(!ModelState.IsValid)
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(RegisterViewModel model)
+    {
+        if (!ModelState.IsValid)
         {
+            return View(model);
+        }
+
+        var existingUser = await _userRepository.GetUserByEmailAsync(model.Email ?? string.Empty);
+        if (existingUser != null)
+        {
+            ModelState.AddModelError(nameof(model.Email), "Cet email est déjà utilisé.");
             return View(model);
         }
 
@@ -36,32 +46,45 @@ public class UserController : Controller
             FirstName = model.FirstName,
             LastName = model.LastName,
             Email = model.Email,
-            Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
+            Password = BCrypt.Net.BCrypt.HashPassword(model.Password ?? string.Empty),
             Role = model.Role,
             ServiceId = model.ServiceId
         };
+
         await _userRepository.AddUserAsync(user);
         await _userRepository.SaveAsync();
-        return RedirectToAction("login");
+
+        return RedirectToAction(nameof(Login));
     }
 
-    [HttpPost
-    ]
-    public async Task<IActionResult> login(LoginViewModel model)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Login(LoginViewModel model)
     {
         if (!ModelState.IsValid)
         {
             return View(model);
         }
 
-        var user = await _userRepository.LoginAsync(model.Email, model.Password);
-        
-        if (user != null)
+        var user = await _userRepository.LoginAsync(model.Email ?? string.Empty, model.Password ?? string.Empty);
+        if (user == null)
         {
-            return RedirectToAction("Index", "Home");
+            ModelState.AddModelError(string.Empty, "Email ou mot de passe incorrect.");
+            return View(model);
         }
 
-        ModelState.AddModelError("", "Invalid login attempt.");
-        return View(model);
+        HttpContext.Session.SetInt32("UserId", user.Id);
+        HttpContext.Session.SetString("UserEmail", user.Email ?? string.Empty);
+        HttpContext.Session.SetString("UserRole", user.Role ?? string.Empty);
+
+        return RedirectToAction("Index", "Home");
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction(nameof(Login));
     }
 }

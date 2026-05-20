@@ -148,6 +148,9 @@ namespace e_paositra.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
                     b.Property<string>("Role")
                         .HasColumnType("text");
 

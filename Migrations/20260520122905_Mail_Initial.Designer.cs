@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace e_paositra.Migrations
 {
     [DbContext(typeof(MailDbContext))]
-    [Migration("20260519082552_Mail_Initial")]
+    [Migration("20260520122905_Mail_Initial")]
     partial class Mail_Initial
     {
         /// <inheritdoc />
@@ -149,6 +149,9 @@ namespace e_paositra.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("text");
 
                     b.Property<string>("Role")
