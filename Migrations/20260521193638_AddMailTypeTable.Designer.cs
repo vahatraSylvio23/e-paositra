@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace e_paositra.Migrations
 {
     [DbContext(typeof(MailDbContext))]
-    partial class MailDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260521193638_AddMailTypeTable")]
+    partial class AddMailTypeTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +61,6 @@ namespace e_paositra.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("DateReceived")
                         .HasColumnType("timestamp with time zone");
 
@@ -74,9 +74,6 @@ namespace e_paositra.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("Observation")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PostalCode")
                         .HasColumnType("text");
 
                     b.Property<string>("Recipient")

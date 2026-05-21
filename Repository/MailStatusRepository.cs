@@ -6,6 +6,12 @@ namespace Repository;
 public class MailStatusRepository : IMailStatusRepository
 {
     private readonly MailDbContext _context;
+
+    public MailStatusRepository(MailDbContext context)
+    {
+        _context = context;
+    }
+
     public async Task<IEnumerable<MailStatus>> GetMailStatusesAsync(int mailId)
     {
         return await _context.MailStatuses.Where(ms => ms.MailId == mailId).ToListAsync();

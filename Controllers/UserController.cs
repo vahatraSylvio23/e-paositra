@@ -46,9 +46,10 @@ public class UserController : Controller
             FirstName = model.FirstName,
             LastName = model.LastName,
             Email = model.Email,
+            PhoneNumber = model.PhoneNumber,
             Password = BCrypt.Net.BCrypt.HashPassword(model.Password ?? string.Empty),
             Role = model.Role,
-            ServiceId = model.ServiceId
+            ServiceId = 1
         };
 
         await _userRepository.AddUserAsync(user);
@@ -77,7 +78,7 @@ public class UserController : Controller
         HttpContext.Session.SetString("UserEmail", user.Email ?? string.Empty);
         HttpContext.Session.SetString("UserRole", user.Role ?? string.Empty);
 
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Mail");
     }
 
     [HttpPost]

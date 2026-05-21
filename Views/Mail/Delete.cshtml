@@ -1,0 +1,47 @@
+@model e_paositra.Models.Mail
+
+@{
+    ViewData["Title"] = "Supprimer le courrier";
+}
+
+<div class="container mx-auto max-w-2xl px-4 py-12">
+    <div class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+        <div class="mb-6 text-center sm:text-left">
+            <p class="text-xs uppercase tracking-widest text-red-500 font-semibold mb-1">Zone de danger</p>
+            <h1 class="text-3xl font-semibold text-slate-900">Supprimer le courrier</h1>
+            <p class="mt-2 text-sm text-slate-500">Cette action est irréversible. Êtes-vous sûr de vouloir supprimer ce courrier ?</p>
+        </div>
+
+        <div class="my-6 rounded-2xl bg-slate-50 p-6 border border-slate-100">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Détails du message</h2>
+            <div class="space-y-3 text-sm text-slate-700">
+                <div class="grid grid-cols-3 gap-2 border-b border-slate-200/60 pb-2">
+                    <span class="font-medium text-slate-500">Sujet :</span>
+                    <span class="col-span-2 font-semibold text-slate-900">@Model.Reference</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 border-b border-slate-200/60 pb-2">
+                    <span class="font-medium text-slate-500">Expéditeur :</span>
+                    <span class="col-span-2 text-slate-800">@Model.Sender</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 border-b border-slate-200/60 pb-2">
+                    <span class="font-medium text-slate-500">Code Postal :</span>
+                    <span class="col-span-2 text-slate-800">@Model.PostalCode</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 border-b border-slate-200/60 pb-2">
+                    <span class="font-medium text-slate-500">Adresse d'envoi :</span>
+                    <span class="col-span-2 text-slate-800">@Model.Address</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 pb-1">
+                    <span class="font-medium text-slate-500">Date d'envoi :</span>
+                    <span class="col-span-2 text-slate-800">@Model.DateSent.ToString("dd MMM yyyy HH:mm")</span>
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="Delete" method="post" class="flex flex-col sm:flex-row gap-3 sm:justify-end mt-8">
+            <input type="hidden" asp-for="Id" />
+            <a asp-action="Index" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 order-2 sm:order-1">Annuler</a>
+            <button type="submit" class="inline-flex items-center justify-center rounded-full bg-red-600 px-6 py-3 text-sm font-semibold text-white hover:bg-red-700 order-1 sm:order-2 shadow-sm transition-colors">Supprimer définitivement</button>
+        </form>
+    </div>
+</div>

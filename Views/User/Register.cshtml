@@ -9,7 +9,7 @@
     <p class="mt-2 text-sm text-slate-500">Créez un compte pour accéder à votre espace.</p>
 
     <form asp-action="Register" method="post" class="mt-8 space-y-6">
-        <div asp-validation-summary="All" class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700"></div>
+        @* <div asp-validation-summary="All" class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700"></div> *@
 
         <div class="grid gap-4 sm:grid-cols-2">
             <div>
@@ -37,18 +37,16 @@
             <span asp-validation-for="Password" class="mt-1 block text-sm text-red-600"></span>
         </div>
 
-        <div class="grid gap-4 sm:grid-cols-2">
-            <div>
-                <label asp-for="Role" class="block text-sm font-medium text-slate-700">Rôle</label>
-                <input asp-for="Role" class="mt-1 block w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:ring-indigo-500" />
-                <span asp-validation-for="Role" class="mt-1 block text-sm text-red-600"></span>
-            </div>
+        <div>
+            <label asp-for="PhoneNumber" class="block text-sm font-medium text-slate-700">Téléphone</label>
+            <input asp-for="PhoneNumber" type="tel" class="mt-1 block w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:ring-indigo-500" />
+            <span asp-validation-for="PhoneNumber" class="mt-1 block text-sm text-red-600"></span>
+        </div>
 
-            <div>
-                <label asp-for="ServiceId" class="block text-sm font-medium text-slate-700">Service ID</label>
-                <input asp-for="ServiceId" type="number" class="mt-1 block w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:ring-indigo-500" />
-                <span asp-validation-for="ServiceId" class="mt-1 block text-sm text-red-600"></span>
-            </div>
+        <div>
+            <label asp-for="Role" class="block text-sm font-medium text-slate-700">Rôle</label>
+            <input asp-for="Role" class="mt-1 block w-full rounded-lg border border-slate-300 bg-slate-50 px-4 py-2 text-slate-900 focus:border-indigo-500 focus:ring-indigo-500" />
+            <span asp-validation-for="Role" class="mt-1 block text-sm text-red-600"></span>
         </div>
 
         <button type="submit" class="w-full rounded-xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700">S'inscrire</button>

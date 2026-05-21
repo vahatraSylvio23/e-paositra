@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace e_paositra.Migrations
 {
     [DbContext(typeof(MailDbContext))]
-    partial class MailDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260521181223_AddMailIdToMailStatuses")]
+    partial class AddMailIdToMailStatuses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +61,6 @@ namespace e_paositra.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Address")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("DateReceived")
                         .HasColumnType("timestamp with time zone");
 
@@ -70,30 +70,25 @@ namespace e_paositra.Migrations
                     b.Property<int>("MailStatusId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("MailTypeId")
+                    b.Property<int>("MailtypeId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Observation")
                         .HasColumnType("text");
 
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Recipient")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Reference")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Sender")
-                        .HasColumnType("text");
-
                     b.Property<int>("ServiceId")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.Property<string>("recipient")
+                        .HasColumnType("text");
 
-                    b.HasIndex("MailTypeId");
+                    b.Property<string>("reference")
+                        .HasColumnType("text");
+
+                    b.Property<string>("sender")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Mails");
                 });
@@ -120,26 +115,6 @@ namespace e_paositra.Migrations
                     b.HasIndex("MailId");
 
                     b.ToTable("MailStatuses");
-                });
-
-            modelBuilder.Entity("e_paositra.Models.MailType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("BasePrice")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MailTypes");
                 });
 
             modelBuilder.Entity("e_paositra.Models.Service", b =>
@@ -195,17 +170,6 @@ namespace e_paositra.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("e_paositra.Models.Mail", b =>
-                {
-                    b.HasOne("e_paositra.Models.MailType", "MailType")
-                        .WithMany("Mails")
-                        .HasForeignKey("MailTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MailType");
-                });
-
             modelBuilder.Entity("e_paositra.Models.MailStatus", b =>
                 {
                     b.HasOne("e_paositra.Models.Mail", "Mail")
@@ -220,11 +184,6 @@ namespace e_paositra.Migrations
             modelBuilder.Entity("e_paositra.Models.Mail", b =>
                 {
                     b.Navigation("MailStatuses");
-                });
-
-            modelBuilder.Entity("e_paositra.Models.MailType", b =>
-                {
-                    b.Navigation("Mails");
                 });
 #pragma warning restore 612, 618
         }
