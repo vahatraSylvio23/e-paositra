@@ -14,38 +14,38 @@
         var isLoggedIn = userId.HasValue;
     }
 
-    @if (isLoggedIn)
-    {
-        <header class="border-b border-slate-200 bg-white shadow-sm">
-            <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-                <a class="text-lg font-semibold text-slate-900" asp-area="" asp-controller="Home" asp-action="Index">e_paositra</a>
-                <nav class="flex items-center gap-4 text-sm font-medium text-slate-700">
-                    <a class="hover:text-slate-900" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    <header class="border-b border-slate-200 bg-white shadow-sm">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+            <a class="text-lg font-semibold text-slate-900" asp-area="" asp-controller="Home" asp-action="Index">e_paositra</a>
+            <nav class="flex items-center gap-4 text-sm font-medium text-slate-700">
+                @if (isLoggedIn)
+                {
+                    @* <a class="hover:text-slate-900" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     <a class="hover:text-slate-900" asp-area="" asp-controller="Mail" asp-action="Index">Mail</a>
                     <form asp-controller="User" asp-action="Logout" method="post" class="inline">
                         @Html.AntiForgeryToken()
                         <button type="submit" class="hover:text-slate-900">Logout</button>
-                    </form>
-                </nav>
-            </div>
-        </header>
+                    </form> *@
+                }
+                else
+                {
+                    <a class="hover:text-slate-900" asp-area="" asp-controller="User" asp-action="Login">Connexion</a>
+                    <a class="rounded-lg bg-slate-900 px-3 py-1.5 text-sm font-semibold text-white hover:bg-slate-800"
+                       asp-area="" asp-controller="User" asp-action="Register">Inscription</a>
+                }
+            </nav>
+        </div>
+    </header>
 
-        <main>
-            @RenderBody()
-        </main>
+    <main>
+        @RenderBody()
+    </main>
 
-        <footer class="border-t border-slate-200 bg-white py-6">
-            <div class="mx-auto max-w-7xl px-4 text-sm text-slate-600 sm:px-6 lg:px-8">
-                &copy; 2026 - e_paositra - <a class="text-slate-700 hover:text-slate-900" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>
-    }
-    else
-    {
-        <main>
-            @RenderBody()
-        </main>
-    }
+    <footer class="border-t border-slate-200 bg-white py-6">
+        <div class="mx-auto max-w-7xl px-4 text-sm text-slate-600 sm:px-6 lg:px-8">
+            &copy; 2026 - e_paositra - <a class="text-slate-700 hover:text-slate-900" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
