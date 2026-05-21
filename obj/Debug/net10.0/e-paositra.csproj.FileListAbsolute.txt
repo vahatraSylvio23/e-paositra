@@ -189,4 +189,6 @@
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/bin/Debug/net10.0/dotnet-tools.json
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/bin/Debug/net10.0/BCrypt-Net-Next.dll
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/compressed/lvcezfrar6-{0}-hma3uinsmg-hma3uinsmg.gz
-/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/compressed/yutul45989-{0}-1jrmspfxl0-1jrmspfxl0.gz
+/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/bin/Debug/net10.0/package-lock.json
+/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/bin/Debug/net10.0/package.json
+/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/compressed/yutul45989-{0}-qi0kddmwti-qi0kddmwti.gz

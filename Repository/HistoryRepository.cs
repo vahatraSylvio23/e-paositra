@@ -1,5 +1,8 @@
+using System.Threading.Tasks;
 using Data;
 using e_paositra.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace Repository;
 
 public class HistoryRepository : IHistoryRepository

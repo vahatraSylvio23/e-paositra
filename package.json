@@ -1,0 +1,11 @@
+{
+  "name": "e-paositra",
+  "private": true,
+  "devDependencies": {
+    "tailwindcss": "^4.3.0"
+  },
+  "scripts": {
+    "build:css": "tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/site.css --minify",
+    "watch:css": "tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/site.css --watch"
+  }
+}

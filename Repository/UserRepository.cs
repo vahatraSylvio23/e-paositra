@@ -1,8 +1,7 @@
-using Data;
 using e_paositra.Models;
-
-namespace Repository;
 using Microsoft.EntityFrameworkCore;
+using Data;
+namespace Repository;
 
 public class UserRepository : IUserRepository
 {
@@ -20,8 +19,7 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> GetUserByEmailAsync(string email)
     {
-        return await _context.Users.
-        FirstOrDefaultAsync(u => u.Email == email);
+        return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
     }
 
     public async Task SaveAsync()

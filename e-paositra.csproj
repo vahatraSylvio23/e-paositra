@@ -22,4 +22,8 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
   </ItemGroup>
 
+  <Target Name="TailwindCssBuild" BeforeTargets="Build" Condition="Exists('package.json')">
+    <Message Importance="High" Text="Building Tailwind CSS with npm..." />
+    <Exec Command="npm run build:css" WorkingDirectory="$(ProjectDir)" />
+  </Target>
 </Project>
