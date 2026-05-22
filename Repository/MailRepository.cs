@@ -2,7 +2,7 @@ using Data;
 using e_paositra.Models;
 
 namespace Repository;
-public class MailRepository
+public class MailRepository : IMailRepository
 {
     private readonly MailDbContext mailDbContext;
 

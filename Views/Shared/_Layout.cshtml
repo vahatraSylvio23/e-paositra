@@ -20,12 +20,12 @@
             <nav class="flex items-center gap-4 text-sm font-medium text-slate-700">
                 @if (isLoggedIn)
                 {
-                    @* <a class="hover:text-slate-900" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                     <a class="hover:text-slate-900" asp-area="" asp-controller="User" asp-action="Modify">Profil</a>
                     <a class="hover:text-slate-900" asp-area="" asp-controller="Mail" asp-action="Index">Mail</a>
                     <form asp-controller="User" asp-action="Logout" method="post" class="inline">
                         @Html.AntiForgeryToken()
-                        <button type="submit" class="hover:text-slate-900">Logout</button>
-                    </form> *@
+                        @* <button type="submit" class="hover:text-slate-900">Logout</button> *@
+                    </form>
                 }
                 else
                 {

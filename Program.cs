@@ -16,6 +16,10 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IMailRepository, MailRepository>();
+builder.Services.AddScoped<IHistoryRepository, HistoryRepository>();
+builder.Services.AddScoped<IMailStatusRepository, MailStatusRepository>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 
 var app = builder.Build();
 

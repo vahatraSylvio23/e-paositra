@@ -1,7 +1,7 @@
-@model ViewModel.RegisterViewModel
+@model ViewModel.ModifyViewModel
 
 @{
-    ViewData["Title"] = "Inscription";
+    ViewData["Title"] = "Modification du profil";
 }
 
 <div class="flex min-h-screen items-center justify-center bg-slate-100 px-4 py-10">
@@ -10,7 +10,7 @@
         <!-- En-tête -->
         <div class="mb-6 text-center">
             <h1 class="text-2xl font-semibold text-slate-900">e_paositra</h1>
-            <p class="mt-1 text-sm text-slate-500">Créez votre compte</p>
+            <p class="mt-1 text-sm text-slate-500">Modifiez votre profil</p>
         </div>
 
         <!-- Carte -->
@@ -21,7 +21,7 @@
                 <div asp-validation-summary="All" class="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700"></div>
             }
 
-            <form asp-action="Register" method="post" class="space-y-4">
+            <form asp-action="Modify" method="post" class="space-y-4">
                 @Html.AntiForgeryToken()
 
                 <!-- Prénom / Nom -->
@@ -71,46 +71,12 @@
                            class="mt-1 block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500" />
                     <span asp-validation-for="PhoneNumber" class="mt-1 block text-xs text-red-600"></span>
                 </div>
-
-                <!-- Rôle -->
-                @* <div>
-                    <label asp-for="Role" class="block text-sm font-medium text-slate-700">Rôle</label>
-                    <input asp-for="Role"
-                           class="mt-1 block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500" />
-                    <span asp-validation-for="Role" class="mt-1 block text-xs text-red-600"></span>
-                </div> *@
-
                 <button type="submit"
                         class="mt-2 w-full rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800">
-                    S'inscrire
+                    Modifier
                 </button>
             </form>
         </div>
 
-        <!-- Lien connexion -->
-        <p class="mt-4 text-center text-sm text-slate-500">
-            Déjà un compte ?
-            <a asp-action="Login" class="font-semibold text-slate-900 hover:underline">Connectez-vous</a>
-        </p>
-
     </div>
 </div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
-
-
-<script>
-    const passwordInput = document.getElementById("Password");
-    const toggleButton = document.getElementById("togglePassword");
-
-    toggleButton.addEventListener("click", function () {
-
-        const isHidden = passwordInput.type === "password";
-
-        passwordInput.type = isHidden ? "text" : "password";
-
-        toggleButton.textContent = isHidden ? "Cacher" : "Afficher";
-    });
-</script>

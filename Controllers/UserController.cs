@@ -20,6 +20,68 @@ public class UserController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> Modify()
+    {
+        var userEmail = HttpContext.Session.GetString("UserEmail");
+
+    if (string.IsNullOrWhiteSpace(userEmail))
+    {
+        return RedirectToAction(nameof(Index), "Mail");
+    }
+
+    var user = await _userRepository.GetUserByEmailAsync(userEmail);
+
+    if (user == null)
+    {
+        return RedirectToAction(nameof(Login));
+    }
+
+    var model = new ModifyViewModel
+    {
+        FirstName = user.FirstName,
+        LastName = user.LastName,
+        Email = user.Email,
+        Password = user.Password,
+        PhoneNumber = user.PhoneNumber
+    };
+
+    return View(model);
+    }    
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Modify(ModifyViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        var userEmail = HttpContext.Session.GetString("UserEmail");
+
+        if (string.IsNullOrWhiteSpace(userEmail))
+        {
+            return RedirectToAction(nameof(Index), "Mail");
+        }
+
+        var user = await _userRepository.GetUserByEmailAsync(userEmail);
+
+        if (user == null)
+        {
+            return RedirectToAction(nameof(Login));
+        }
+
+        user.FirstName = model.FirstName;
+        user.LastName = model.LastName;
+        user.PhoneNumber = model.PhoneNumber;
+        user.Password = model.Password;
+
+        await _userRepository.UpdateUserAsync(user);
+
+        return RedirectToAction(nameof(Modify));
+    }
+
+    [HttpGet]
     public IActionResult Register()
     {
         return View();
@@ -48,7 +110,6 @@ public class UserController : Controller
             Email = model.Email,
             PhoneNumber = model.PhoneNumber,
             Password = BCrypt.Net.BCrypt.HashPassword(model.Password ?? string.Empty),
-            // Role = model.Role,
             ServiceId = 1
         };
 

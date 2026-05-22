@@ -19,7 +19,7 @@
                     <p class="mt-1 text-sm text-slate-500">@Model.CurrentUserEmail</p>
                 </div>
 
-                <a asp-action="Create" class="mb-4 block rounded-lg bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-slate-800">Envoyer</a>
+                <a asp-action="Create" class="mb-4 block rounded-lg bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-slate-800">Envoyer un courrier</a>
 
                 <nav class="space-y-1 text-sm">
                     <!-- Dossiers -->
@@ -114,7 +114,7 @@
                 {
                     <div class="rounded-lg bg-white p-10 text-center text-sm text-slate-500">
                         <svg class="mx-auto mb-3 h-10 w-10 text-slate-300" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M4 4h16v2l-8 5-8-5V4zm0 4l8 5 8-5v8H4V8z"/>
+                            <path d="M4 4h16v2l5-8-5V4zm0 4l8 5 8-5v8H4V8z"/>
                         </svg>
                         Aucun message pour le moment.
                     </div>
@@ -128,9 +128,7 @@
                     var avatarColors = new[] { "#4285f4","#0f9d58","#db4437","#f4b400","#7e57c2","#00acc1","#e67c73","#33b679" };
                     var colorIndex = Math.Abs(displayName?.GetHashCode() ?? 0) % avatarColors.Length;
                     var avatarColor = avatarColors[colorIndex];
-                    var statusClass = item.StatusLabel == "Livré"    ? "bg-emerald-100 text-emerald-800"
-                                    : item.StatusLabel == "Envoyé"   ? "bg-sky-100 text-sky-800"
-                                    : "bg-amber-100 text-amber-800";
+                    var statusClass = item.StatusLabel == "Livré"    ? "bg-emerald-100 text-emerald-800": item.StatusLabel == "Envoyé"   ? "bg-sky-100 text-sky-800": "bg-amber-100 text-amber-800";
 
                     <a asp-action="Details" asp-route-id="@item.Id"
                        class="group flex items-center justify-between rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 transition hover:bg-slate-50">
