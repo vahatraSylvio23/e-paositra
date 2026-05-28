@@ -1,4 +1,3 @@
-using System;
 using Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -38,11 +37,8 @@ public class MailController : Controller
 
         var mailIds = mails.Select(m => m.Id).ToList();
 
-        var latestStatusDictionary = (await _context.MailStatuses
-            .Where(ms => mailIds.Contains(ms.MailId))
-            .ToListAsync())
-            .GroupBy(ms => ms.MailId)
-            .ToDictionary(
+        var latestStatusDictionary = (await _context.MailStatuses.Where(ms => mailIds.Contains(ms.MailId)).ToListAsync()).GroupBy(ms => ms.MailId)
+        .ToDictionary(
                 g => g.Key,
                 g => g.OrderByDescending(ms => ms.Id).First().status ?? "En attente"
             );
@@ -80,7 +76,6 @@ public class MailController : Controller
 
         return View(viewModel);
     }
-
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null) return NotFound();
@@ -101,7 +96,7 @@ public class MailController : Controller
 
         return View(mail);
     }
-
+    [HttpGet]
     public IActionResult Create()
     {
         var userEmail = HttpContext.Session.GetString("UserEmail");
@@ -134,7 +129,7 @@ public class MailController : Controller
         string startCoords = $"{start.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{start.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
         string endCoords = $"{end.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{end.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
 
-        string apiKey = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjJiYjgzZjUyNWQwMjRlNDc5MzhmNDNlYWEzZTUxZjMxIiwiaCI6Im11cm11cjY0In0=";
+        string apiKey = "";
         string url = $"https://api.openrouteservice.org/v2/directions/driving-car?api_key={apiKey}&start={startCoords}&end={endCoords}";
 
         using var httpClient = new HttpClient();
@@ -276,16 +271,11 @@ public class MailController : Controller
 
         foreach (var mail in mails)
         {
-            var currentStatus = (await _context.MailStatuses
-                .Where(ms => ms.MailId == mail.Id)
-                .ToListAsync())
-                .OrderByDescending(s => s.Id)
-                .FirstOrDefault()?.status ?? "En attente";
+            var currentStatus = (await _context.MailStatuses.Where(ms => ms.MailId == mail.Id).ToListAsync()).OrderByDescending(s => s.Id).FirstOrDefault()?.status ?? "En attente";
 
             if (now >= mail.DateReceived)
             {
                 if (currentStatus == "Livré") continue;
-
                 mail.MailStatusId = 3;
                 _context.MailStatuses.Add(new MailStatus { status = "Livré", Type = "Automatique", MailId = mail.Id });
                 _context.Histories.Add(new History
@@ -318,7 +308,6 @@ public class MailController : Controller
                 }
             }
         }
-
         if (changed) await _context.SaveChangesAsync();
     }
 
