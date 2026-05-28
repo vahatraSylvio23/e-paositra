@@ -18,7 +18,8 @@
 
             @if (!ViewData.ModelState.IsValid)
             {
-                <div asp-validation-summary="All" class="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700"></div>
+                <div asp-validation-summary="All"
+                     class="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700"></div>
             }
 
             <form asp-action="Modify" method="post" class="space-y-4">
@@ -54,12 +55,10 @@
                         Mot de passe
                     </label>
                     <div class="mt-1 flex items-center gap-2">
-                        <input asp-for="Password"
-                            id="Password"
-                            type="password"
-                            autocomplete="current-password"
-                            class="flex-1 rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500" />
-                        <button type="button"id="togglePassword"class="shrink-0 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-600 hover:bg-slate-100">Afficher</button>
+                        <input asp-for="Password" id="Password" type="password" autocomplete="current-password"
+                               class="flex-1 rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500" />
+                        <button type="button" id="togglePassword"
+                                class="shrink-0 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-600 hover:bg-slate-100">Afficher</button>
                     </div>
                     <span asp-validation-for="Password" class="mt-1 block text-xs text-red-600"></span>
                 </div>

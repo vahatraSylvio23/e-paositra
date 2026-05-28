@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/e_paositra.styles.css" asp-append-version="true" />
 </head>
+
 <body class="min-h-screen bg-slate-50 text-slate-900">
     @{
         var userId = Context.Session.GetInt32("UserId");
@@ -16,11 +18,12 @@
 
     <header class="border-b border-slate-200 bg-white shadow-sm">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-            <a class="text-lg font-semibold text-slate-900" asp-area="" asp-controller="Home" asp-action="Index">e_paositra</a>
+            <a class="text-lg font-semibold text-slate-900" asp-area="" asp-controller="Mail"
+               asp-action="Index">e_paositra</a>
             <nav class="flex items-center gap-4 text-sm font-medium text-slate-700">
                 @if (isLoggedIn)
                 {
-                     <a class="hover:text-slate-900" asp-area="" asp-controller="User" asp-action="Modify">Profil</a>
+                    <a class="hover:text-slate-900" asp-area="" asp-controller="User" asp-action="Modify">Profil</a>
                     <a class="hover:text-slate-900" asp-area="" asp-controller="Mail" asp-action="Index">Mail</a>
                     <form asp-controller="User" asp-action="Logout" method="post" class="inline">
                         @Html.AntiForgeryToken()
@@ -43,7 +46,8 @@
 
     <footer class="border-t border-slate-200 bg-white py-6">
         <div class="mx-auto max-w-7xl px-4 text-sm text-slate-600 sm:px-6 lg:px-8">
-            &copy; 2026 - e_paositra - <a class="text-slate-700 hover:text-slate-900" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2026 - e_paositra - <a class="text-slate-700 hover:text-slate-900" asp-area="" asp-controller="Home"
+                                          asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 
@@ -51,4 +55,5 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

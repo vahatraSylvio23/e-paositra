@@ -14,6 +14,11 @@ public class Mail
     public DateTime DateSent { get; set; }
     public DateTime DateReceived { get; set; }
     public int ServiceId { get; set; }
+    public string? StartAgency { get; set; }
+    public string? EndAgency { get; set; }
+    public double? Distance { get; set; }
+    public string? Duration { get; set; }
+
     public string? Observation { get; set; }
     public ICollection<MailStatus>? MailStatuses { get; set; }
 }

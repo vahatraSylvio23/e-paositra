@@ -139,7 +139,7 @@ public class UserController : Controller
         HttpContext.Session.SetString("UserEmail", user.Email ?? string.Empty);
         HttpContext.Session.SetString("UserRole", user.Role ?? string.Empty);
 
-        return RedirectToAction("Index", "Mail");
+        return RedirectToAction("Dashboard", "Mail");
     }
 
     [HttpPost]

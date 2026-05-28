@@ -19,136 +19,160 @@
                     <p class="mt-1 text-sm text-slate-500">@Model.CurrentUserEmail</p>
                 </div>
 
-                <a asp-action="Create" class="mb-4 block rounded-lg bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-slate-800">Envoyer un courrier</a>
+                <a asp-action="Create"
+                   class="mb-4 block rounded-lg bg-slate-900 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-slate-800">Envoyer
+                    un courrier</a>
 
-                <nav class="space-y-1 text-sm">
-                    <!-- Dossiers -->
-                    <p class="px-3 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Dossiers</p>
-                    <a asp-action="Index"
-                       class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 @(activeFolder == "inbox" && string.IsNullOrEmpty(activeStatus) ? "bg-slate-100 font-semibold" : "")">
-                        <span>Reçus</span>
-                        <span class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold">@Model.InboxCount</span>
-                    </a>
-                    <a asp-action="Index" asp-route-folder="outbox"
-                       class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 @(activeFolder == "outbox" && string.IsNullOrEmpty(activeStatus) ? "bg-slate-100 font-semibold" : "")">
-                        <span>Envoyés</span>
-                        <span class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold">@Model.OutboxCount</span>
-                    </a>
+                    <nav class="space-y-1 text-sm">
+                        <!-- Navigation -->
+                        <p class="px-3 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Navigation</p>
+                        <a asp-controller="Mail" asp-action="Dashboard"
+                           class="flex items-center gap-2 rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100">
+                            <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                            </svg>
+                            Tableau de bord
+                        </a>
 
-                    <!-- Filtres par statut -->
-                    <p class="px-3 pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Par statut</p>
-                    <a asp-action="Index" asp-route-status="pending"
-                       class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 @(activeStatus == "pending" ? "bg-amber-50 font-semibold text-amber-800" : "")">
-                        <span>En attente</span>
-                        <span class="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">@Model.PendingCount</span>
-                    </a>
-                    <a asp-action="Index" asp-route-status="sent"
-                       class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 @(activeStatus == "sent" ? "bg-sky-50 font-semibold text-sky-800" : "")">
-                        <span>Envoyé</span>
-                        <span class="rounded-full bg-sky-100 px-2 py-0.5 text-xs font-semibold text-sky-800">@Model.SentCount</span>
-                    </a>
-                    <a asp-action="Index" asp-route-status="delivered"
-                       class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 @(activeStatus == "delivered" ? "bg-emerald-50 font-semibold text-emerald-800" : "")">
-                        <span>Livré</span>
-                        <span class="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">@Model.DeliveredCount</span>
-                    </a>
-                </nav>
-            </div>
+                        <!-- Dossiers -->
+                        <p class="px-3 pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Dossiers</p>
+                        <a asp-action="Index"
+                           class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 @(activeFolder == "inbox" && string.IsNullOrEmpty(activeStatus) ? "bg-slate-100 font-semibold" : "")">
+                            <span>Reçus</span>
+                            <span
+                            class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold">@Model.InboxCount</span>
+                        </a>
+                        <a asp-action="Index" asp-route-folder="outbox"
+                           class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 @(activeFolder == "outbox" && string.IsNullOrEmpty(activeStatus) ? "bg-slate-100 font-semibold" : "")">
+                            <span>Envoyés</span>
+                            <span
+                            class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold">@Model.OutboxCount</span>
+                        </a>
 
-            <!-- Logout en bas de la sidebar -->
-            <div class="border-t border-slate-200 pt-4">
-                <form asp-controller="User" asp-action="Logout" method="post">
-                    @Html.AntiForgeryToken()
-                    <button type="submit"
-                            class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900">
-                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M16 13v-2H7V8l-5 4 5 4v-3h9zm4-9H12v2h8v14h-8v2h10V4z"/>
-                        </svg>
-                        Déconnexion
-                    </button>
-                </form>
-            </div>
-        </aside>
+                        <!-- Filtres par statut -->
+                        <p class="px-3 pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Par statut
+                        </p>
+                        <a asp-action="Index" asp-route-status="pending"
+                           class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 @(activeStatus == "pending" ? "bg-amber-50 font-semibold text-amber-800" : "")">
+                            <span>En attente</span>
+                            <span
+                            class="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">@Model.PendingCount</span>
+                        </a>
+                        <a asp-action="Index" asp-route-status="sent"
+                           class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 @(activeStatus == "sent" ? "bg-sky-50 font-semibold text-sky-800" : "")">
+                            <span>Envoyé</span>
+                            <span
+                            class="rounded-full bg-sky-100 px-2 py-0.5 text-xs font-semibold text-sky-800">@Model.SentCount</span>
+                        </a>
+                        <a asp-action="Index" asp-route-status="delivered"
+                           class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100 @(activeStatus == "delivered" ? "bg-emerald-50 font-semibold text-emerald-800" : "")">
+                            <span>Livré</span>
+                            <span
+                            class="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">@Model.DeliveredCount</span>
+                        </a>
+                    </nav>
+                </div>
 
-        <!-- Main content -->
-        <main class="flex-1 p-6">
-            <div class="mb-6 flex items-center justify-between rounded-lg bg-white p-4 shadow-sm">
-                <h2 class="text-2xl font-semibold text-slate-900">Mes courriers</h2>
-                <a asp-action="Create" class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Nouveau courrier</a>
-            </div>
+                <!-- Logout en bas de la sidebar -->
+                <div class="border-t border-slate-200 pt-4">
+                    <form asp-controller="User" asp-action="Logout" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit"
+                                class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900">
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 13v-2H7V8l-5 4 5 4v-3h9zm4-9H12v2h8v14h-8v2h10V4z" />
+                            </svg>
+                            Déconnexion
+                        </button>
+                    </form>
+                </div>
+            </aside>
 
-            @{
-                // Calcul des listes à afficher selon le filtre actif
-                IEnumerable<ViewModel.MailSummaryViewModel> displayMails;
-                string sectionTitle;
-
-                if (!string.IsNullOrEmpty(activeStatus))
-                {
-                    var statusLabel = activeStatus == "pending" ? "En attente"
-                                    : activeStatus == "sent" ? "Envoyé"
-                                    : "Livré";
-                    displayMails = Model.InboxMails.Concat(Model.OutboxMails)
-                                        .Where(m => m.StatusLabel == statusLabel)
-                                        .OrderByDescending(m => m.DateSent);
-                    sectionTitle = statusLabel;
-                }
-                else if (activeFolder == "outbox")
-                {
-                    displayMails = Model.OutboxMails;
-                    sectionTitle = "Envoyés";
-                }
-                else
-                {
-                    displayMails = Model.InboxMails;
-                    sectionTitle = "Reçus";
-                }
-            }
-
-            <div class="mb-3 flex items-center gap-2 border-b border-slate-200 pb-3">
-                <span class="text-sm font-semibold text-slate-700">@sectionTitle</span>
-                <span class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold text-slate-600">@displayMails.Count()</span>
-            </div>
-
-            <div class="space-y-3">
-                @if (!displayMails.Any())
-                {
-                    <div class="rounded-lg bg-white p-10 text-center text-sm text-slate-500">
-                        <svg class="mx-auto mb-3 h-10 w-10 text-slate-300" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M4 4h16v2l5-8-5V4zm0 4l8 5 8-5v8H4V8z"/>
-                        </svg>
-                        Aucun message pour le moment.
+            <!-- Main content -->
+            <main class="flex-1 p-6">
+                <div class="mb-6 flex items-center justify-between rounded-lg bg-white p-4 shadow-sm">
+                    <h2 class="text-2xl font-semibold text-slate-900">Mes courriers</h2>
+                    <a asp-action="Create"
+                       class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">Nouveau
+                        courrier</a>
                     </div>
-                }
 
-                @foreach (var item in displayMails)
-                {
-                    var isInbox = item.Recipient == Model.CurrentUserEmail;
-                    var displayName = isInbox ? item.Sender : item.Recipient;
-                    var initials = displayName?.Length > 0 ? displayName[0].ToString().ToUpper() : "?";
-                    var avatarColors = new[] { "#4285f4","#0f9d58","#db4437","#f4b400","#7e57c2","#00acc1","#e67c73","#33b679" };
-                    var colorIndex = Math.Abs(displayName?.GetHashCode() ?? 0) % avatarColors.Length;
-                    var avatarColor = avatarColors[colorIndex];
-                    var statusClass = item.StatusLabel == "Livré"    ? "bg-emerald-100 text-emerald-800": item.StatusLabel == "Envoyé"   ? "bg-sky-100 text-sky-800": "bg-amber-100 text-amber-800";
+                    @{
+                        // Calcul des listes à afficher selon le filtre actif
+                        IEnumerable<ViewModel.MailSummaryViewModel> displayMails;
+                        string sectionTitle;
 
-                    <a asp-action="Details" asp-route-id="@item.Id"
-                       class="group flex items-center justify-between rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 transition hover:bg-slate-50">
-                        <div class="flex items-center gap-3">
-                            <div class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold text-white flex-shrink-0"
-                                 style="background: @avatarColor">@initials</div>
-                            <div class="min-w-0">
-                                <div class="truncate text-sm font-semibold text-slate-900">@item.Reference</div>
-                                <div class="truncate text-xs text-slate-500">
-                                    @(isInbox ? $"De : {item.Sender}" : $"À : {item.Recipient}")
-                                </div>
+                        if (!string.IsNullOrEmpty(activeStatus))
+                        {
+                            var statusLabel = activeStatus == "pending" ? "En attente"
+                                            : activeStatus == "sent" ? "Envoyé"
+                                            : "Livré";
+                            displayMails = Model.InboxMails.Concat(Model.OutboxMails)
+                                                .Where(m => m.StatusLabel == statusLabel)
+                                                .OrderByDescending(m => m.DateSent);
+                            sectionTitle = statusLabel;
+                        }
+                        else if (activeFolder == "outbox")
+                        {
+                            displayMails = Model.OutboxMails;
+                            sectionTitle = "Envoyés";
+                        }
+                        else
+                        {
+                            displayMails = Model.InboxMails;
+                            sectionTitle = "Reçus";
+                        }
+                    }
+
+                    <div class="mb-3 flex items-center gap-2 border-b border-slate-200 pb-3">
+                        <span class="text-sm font-semibold text-slate-700">@sectionTitle</span>
+                        <span
+                        class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold text-slate-600">@displayMails.Count()</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        @if (!displayMails.Any())
+                        {
+                            <div class="rounded-lg bg-white p-10 text-center text-sm text-slate-500">
+                                <svg class="mx-auto mb-3 h-10 w-10 text-slate-300" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M4 4h16v2l5-8-5V4zm0 4l8 5 8-5v8H4V8z" />
+                                </svg>
+                                Aucun message pour le moment.
                             </div>
-                        </div>
-                        <div class="flex flex-col items-end gap-1 text-right flex-shrink-0 ml-4">
-                            <div class="text-xs text-slate-500">@item.DateSent.ToString("dd MMM")</div>
-                            <span class="inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold @statusClass">@item.StatusLabel</span>
-                        </div>
-                    </a>
-                }
+                        }
+
+                        @foreach (var item in displayMails)
+                        {
+                            var isInbox = item.Recipient == Model.CurrentUserEmail;
+                            var displayName = isInbox ? item.Sender : item.Recipient;
+                            var initials = displayName?.Length > 0 ? displayName[0].ToString().ToUpper() : "?";
+                            var avatarColors = new[] {
+       "#4285f4","#0f9d58","#db4437","#f4b400","#7e57c2","#00acc1","#e67c73","#33b679" };
+                            var colorIndex = Math.Abs(displayName?.GetHashCode() ?? 0) % avatarColors.Length;
+                            var avatarColor = avatarColors[colorIndex];
+                            var statusClass = item.StatusLabel == "Livré" ? "bg-emerald-100 text-emerald-800" : item.StatusLabel ==
+                "Envoyé" ? "bg-sky-100 text-sky-800" : "bg-amber-100 text-amber-800";
+
+                            <a asp-action="Details" asp-route-id="@item.Id"
+                               class="group flex items-center justify-between rounded-lg border border-slate-200 bg-white px-4 py-3 text-slate-900 transition hover:bg-slate-50">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold text-white flex-shrink-0"
+                                         style="background: @avatarColor">@initials</div>
+                                    <div class="min-w-0">
+                                        <div class="truncate text-sm font-semibold text-slate-900">@item.Reference</div>
+                                        <div class="truncate text-xs text-slate-500">
+                                            @(isInbox ? $"De : {item.Sender}" : $"À : {item.Recipient}")
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end gap-1 text-right flex-shrink-0 ml-4">
+                                    <div class="text-xs text-slate-500">@item.DateSent.ToString("dd MMM")</div>
+                                    <span
+                                    class="inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold @statusClass">@item.StatusLabel</span>
+                                </div>
+                            </a>
+                        }
+                    </div>
+                </main>
             </div>
-        </main>
-    </div>
-</div>
+        </div>
