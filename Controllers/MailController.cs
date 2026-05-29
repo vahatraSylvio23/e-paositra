@@ -82,57 +82,6 @@ public class MailController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CalculateDistance(string startAgency, string endAgency)
-    {
-        if (string.IsNullOrWhiteSpace(startAgency) || string.IsNullOrWhiteSpace(endAgency))
-            return Json(new { success = false, message = "Veuillez sélectionner les agences de départ et d'arrivée." });
-
-        var agencies = _agencyService.GetAllAgencies();
-        var start = agencies.FirstOrDefault(a => a.Name == startAgency);
-        var end   = agencies.FirstOrDefault(a => a.Name == endAgency);
-
-        if (start == null || end == null)
-            return Json(new { success = false, message = "Une ou plusieurs agences sélectionnées sont introuvables." });
-
-        string startCoords = $"{start.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{start.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
-        string endCoords   = $"{end.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{end.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
-
-        string apiKey = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjJiYjgzZjUyNWQwMjRlNDc5MzhmNDNlYWEzZTUxZjMxIiwiaCI6Im11cm11cjY0In0=";
-        string url    = $"https://api.openrouteservice.org/v2/directions/driving-car?api_key={apiKey}&start={startCoords}&end={endCoords}";
-
-        using var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.Add("User-Agent", "e-paositra-distance-calculator");
-
-        try
-        {
-            var response = await httpClient.GetAsync(url);
-            if (!response.IsSuccessStatusCode)
-                return Json(new { success = false, message = "Erreur API OpenRouteService ou problème de connexion." });
-
-            var jsonString = await response.Content.ReadAsStringAsync();
-            using var doc  = System.Text.Json.JsonDocument.Parse(jsonString);
-
-            var features = doc.RootElement.GetProperty("features");
-            if (features.GetArrayLength() == 0)
-                return Json(new { success = false, message = "Aucun itinéraire trouvé entre ces deux agences." });
-
-            var summary = features[0].GetProperty("properties").GetProperty("summary");
-
-            double distanceInKm = Math.Round(summary.GetProperty("distance").GetDouble() / 1000.0, 2);
-            var    timeSpan     = TimeSpan.FromSeconds(summary.GetProperty("duration").GetDouble());
-            string duration     = timeSpan.TotalHours >= 1
-                ? $"{(int)timeSpan.TotalHours}h {timeSpan.Minutes}m"
-                : $"{timeSpan.Minutes}m";
-
-            return Json(new { success = true, distance = distanceInKm, duration });
-        }
-        catch (Exception ex)
-        {
-            return Json(new { success = false, message = $"Une erreur est survenue : {ex.Message}" });
-        }
-    }
-
-    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Mail mail)
     {
@@ -345,4 +294,54 @@ public class MailController : Controller
         null or "" => "En attente",
         _ => status!
     };
+    [HttpPost]
+    public async Task<IActionResult> CalculateDistance(string startAgency, string endAgency)
+    {
+        if (string.IsNullOrWhiteSpace(startAgency) || string.IsNullOrWhiteSpace(endAgency))
+            return Json(new { success = false, message = "Veuillez sélectionner les agences de départ et d'arrivée." });
+
+        var agencies = _agencyService.GetAllAgencies();
+        var start = agencies.FirstOrDefault(a => a.Name == startAgency);
+        var end   = agencies.FirstOrDefault(a => a.Name == endAgency);
+
+        if (start == null || end == null)
+            return Json(new { success = false, message = "Une ou plusieurs agences sélectionnées sont introuvables." });
+
+        string startCoords = $"{start.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{start.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+        string endCoords   = $"{end.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)},{end.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+
+        string apiKey = "";
+        string url    = $"https://api.openrouteservice.org/v2/directions/driving-car?api_key={apiKey}&start={startCoords}&end={endCoords}";
+
+        using var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Add("User-Agent", "e-paositra-distance-calculator");
+
+        try
+        {
+            var response = await httpClient.GetAsync(url);
+            if (!response.IsSuccessStatusCode)
+                return Json(new { success = false, message = "Erreur API OpenRouteService ou problème de connexion." });
+
+            var jsonString = await response.Content.ReadAsStringAsync();
+            using var doc  = System.Text.Json.JsonDocument.Parse(jsonString);
+
+            var features = doc.RootElement.GetProperty("features");
+            if (features.GetArrayLength() == 0)
+                return Json(new { success = false, message = "Aucun itinéraire trouvé entre ces deux agences." });
+
+            var summary = features[0].GetProperty("properties").GetProperty("summary");
+
+            double distanceInKm = Math.Round(summary.GetProperty("distance").GetDouble() / 1000.0, 2);
+            var    timeSpan     = TimeSpan.FromSeconds(summary.GetProperty("duration").GetDouble());
+            string duration     = timeSpan.TotalHours >= 1
+                ? $"{(int)timeSpan.TotalHours}h {timeSpan.Minutes}m"
+                : $"{timeSpan.Minutes}m";
+
+            return Json(new { success = true, distance = distanceInKm, duration });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { success = false, message = $"Une erreur est survenue : {ex.Message}" });
+        }
+    }
 }
