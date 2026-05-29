@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Data;
 using e_paositra.Models;
 using Microsoft.EntityFrameworkCore;
@@ -13,29 +12,31 @@ public class HistoryRepository : IHistoryRepository
     {
         _context = context;
     }
+
+    public async Task<IEnumerable<History>> GetHistoriesByMailIdAsync(int mailId)
+    {
+        return await _context.Histories
+            .Where(h => h.MailId == mailId)
+            .OrderByDescending(h => h.ActionDate)
+            .ToListAsync();
+    }
+
     public Task AddHistoryAsync(History history)
     {
         _context.Histories.Add(history);
         return Task.CompletedTask;
     }
-    public async Task<IEnumerable<History>> GetAllSync(int mailId)
+
+    public async Task DeleteHistoriesByMailIdAsync(int mailId)
     {
-        return await _context.Histories.Where(h => h.MailId == mailId).ToListAsync();
+        var histories = await _context.Histories
+            .Where(h => h.MailId == mailId)
+            .ToListAsync();
+        _context.Histories.RemoveRange(histories);
     }
-    public async Task<History?> GetHistoryByIdAsync(int id)
-    {
-        return await _context.Histories.FindAsync(id);
-    }
+
     public async Task SaveAsync()
     {
         await _context.SaveChangesAsync();
-    }
-    public void UpdateHistory(History history)
-    {
-        _context.Histories.Update(history);
-    }
-    public void deleteHistory(History history)
-    {
-        _context.Histories.Remove(history);
     }
 }

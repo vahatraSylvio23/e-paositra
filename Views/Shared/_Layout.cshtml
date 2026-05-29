@@ -24,7 +24,7 @@
                 @if (isLoggedIn)
                 {
                     <a class="hover:text-slate-900" asp-area="" asp-controller="User" asp-action="Modify">Profil</a>
-                    <a class="hover:text-slate-900" asp-area="" asp-controller="Mail" asp-action="Index">Mail</a>
+                    <a class="hover:text-slate-900" asp-area="" asp-controller="Mail" asp-action="Index">Courrier</a>
                     <form asp-controller="User" asp-action="Logout" method="post" class="inline">
                         @Html.AntiForgeryToken()
                         @* <button type="submit" class="hover:text-slate-900">Logout</button> *@

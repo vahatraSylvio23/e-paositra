@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("e-paositra")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bce7862c99e0e7c9fcfaf9462a3f410693890f13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+341dc8104a1511ecfe0b24bbdd17c6fa7b14673b")]
 [assembly: System.Reflection.AssemblyProductAttribute("e-paositra")]
 [assembly: System.Reflection.AssemblyTitleAttribute("e-paositra")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

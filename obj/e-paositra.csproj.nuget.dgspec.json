@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/e-paositra.csproj": {}
+    "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/e-paositra.csproj": {}
   },
   "projects": {
-    "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/e-paositra.csproj": {
+    "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/e-paositra.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/e-paositra.csproj",
+        "projectUniqueName": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/e-paositra.csproj",
         "projectName": "e-paositra",
-        "projectPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/e-paositra.csproj",
+        "projectPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/e-paositra.csproj",
         "packagesPath": "/home/vahatra/.nuget/packages/",
-        "outputPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/",
+        "outputPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/vahatra/.nuget/NuGet/NuGet.Config"

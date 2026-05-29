@@ -1,6 +1,7 @@
+using Data;
 using e_paositra.Models;
 using Microsoft.EntityFrameworkCore;
-using Data;
+
 namespace Repository;
 
 public class UserRepository : IUserRepository
@@ -11,34 +12,50 @@ public class UserRepository : IUserRepository
     {
         _context = context;
     }
-    public Task AddUserAsync(User user)
-    {
-        _context.Users.Add(user);
-        return Task.CompletedTask;
-    }
 
     public async Task<User?> GetUserByEmailAsync(string email)
     {
         return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
     }
 
-    public async Task SaveAsync()
+    public Task AddUserAsync(User user)
     {
-        await _context.SaveChangesAsync();
+        _context.Users.Add(user);
+        return Task.CompletedTask;
     }
+
+    public Task UpdateUserAsync(User user)
+    {
+        _context.Users.Update(user);
+        return Task.CompletedTask;
+    }
+
     public async Task<User?> LoginAsync(string email, string password)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-        if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
+        if (user == null || string.IsNullOrWhiteSpace(user.Password))
+            return null;
+
+        // Mot de passe BCrypt (commence par $2a$ ou $2b$)
+        bool isBcrypt = user.Password.StartsWith("$2a$") || user.Password.StartsWith("$2b$");
+
+        bool passwordValid = isBcrypt
+            ? BCrypt.Net.BCrypt.Verify(password, user.Password)
+            : user.Password == password; // mot de passe en clair (legacy)
+
+        // Migration automatique : on re-hashe si le mot de passe était en clair
+        if (passwordValid && !isBcrypt)
         {
-            return user;
+            user.Password = BCrypt.Net.BCrypt.HashPassword(password);
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
         }
-        return null;
+
+        return passwordValid ? user : null;
     }
 
-    public async Task UpdateUserAsync(User user)
+    public async Task SaveAsync()
     {
-        _context.Users.Update(user);
         await _context.SaveChangesAsync();
     }
 }

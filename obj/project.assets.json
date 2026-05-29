@@ -2201,7 +2201,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
-      "Bcrypt.Net-Next >= 4.2.0",
+      "BCrypt.Net-Next >= 4.2.0",
       "Microsoft.EntityFrameworkCore >= 10.0.7",
       "Microsoft.EntityFrameworkCore.Design >= 10.0.7",
       "Microsoft.EntityFrameworkCore.Relational >= 10.0.7",
@@ -2215,11 +2215,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/e-paositra.csproj",
+      "projectUniqueName": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/e-paositra.csproj",
       "projectName": "e-paositra",
-      "projectPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/e-paositra.csproj",
+      "projectPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/e-paositra.csproj",
       "packagesPath": "/home/vahatra/.nuget/packages/",
-      "outputPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/",
+      "outputPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/vahatra/.nuget/NuGet/NuGet.Config"
@@ -2253,7 +2253,7 @@
       "net10.0": {
         "targetAlias": "net10.0",
         "dependencies": {
-          "Bcrypt.Net-Next": {
+          "BCrypt.Net-Next": {
             "target": "Package",
             "version": "[4.2.0, )"
           },

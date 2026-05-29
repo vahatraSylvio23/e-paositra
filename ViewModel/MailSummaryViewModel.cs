@@ -30,6 +30,7 @@ public class DashboardViewModel
 {
     public string CurrentUserEmail { get; set; } = string.Empty;
     public string FirstName { get; set; } = string.Empty;
+    public string LastName {get ; set; } = string.Empty;
 
     // Compteurs globaux
     public int InboxCount { get; set; }

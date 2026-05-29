@@ -19,69 +19,69 @@ build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v10.0
 build_property.RootNamespace = e_paositra
 build_property.RootNamespace = e_paositra
-build_property.ProjectDir = /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/
+build_property.ProjectDir = /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra
+build_property.MSBuildProjectDirectory = /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/Home/Index.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/Home/Privacy.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/Mail/Create.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/Mail/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFpbC9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/Mail/Dashboard.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/Mail/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFpbC9EYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/Mail/Delete.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/Mail/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFpbC9EZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/Mail/Details.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/Mail/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFpbC9EZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/Mail/Index.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/Mail/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTWFpbC9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/Shared/_ValidationScriptsPartial.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/User/Login.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/User/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/User/Modify.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/User/Modify.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9Nb2RpZnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/User/Register.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/User/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/_ViewImports.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/_ViewStart.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/Views/Shared/_Layout.cshtml]
+[/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-798swsboj3

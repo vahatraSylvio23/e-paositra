@@ -4,10 +4,8 @@ namespace Repository;
 
 public interface IHistoryRepository
 {
-    Task<IEnumerable<History>> GetAllSync(int mailId);
-    Task<History?> GetHistoryByIdAsync(int id);
+    Task<IEnumerable<History>> GetHistoriesByMailIdAsync(int mailId);
     Task AddHistoryAsync(History history);
+    Task DeleteHistoriesByMailIdAsync(int mailId);
     Task SaveAsync();
-    void UpdateHistory(History history);
-    void deleteHistory(History history);
 }

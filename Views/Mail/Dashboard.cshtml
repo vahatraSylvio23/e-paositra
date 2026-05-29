@@ -33,7 +33,7 @@
                         Tableau de bord
                     </a>
 
-                    <!-- Dossiers -->
+                    @* <!-- Dossiers -->
                     <p class="px-3 pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Dossiers</p>
                     <a asp-controller="Mail" asp-action="Index"
                        class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100">
@@ -44,23 +44,23 @@
                        class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100">
                         <span>Envoyés</span>
                         <span class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold">@Model.OutboxCount</span>
-                    </a>
+                    </a> *@
 
                     <p class="px-3 pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Par statut</p>
                     <a asp-controller="Mail" asp-action="Index" asp-route-status="pending"
                        class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100">
                         <span>En attente</span>
-                        <span class="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">@Model.PendingCount</span>
+                        <span class="rounded-full px-2 py-0.5 text-xs font-semibold text-amber-800">@Model.PendingCount</span>
                     </a>
                     <a asp-controller="Mail" asp-action="Index" asp-route-status="sent"
                        class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100">
                         <span>Envoyé</span>
-                        <span class="rounded-full bg-sky-100 px-2 py-0.5 text-xs font-semibold text-sky-800">@Model.SentCount</span>
+                        <span class="rounded-full px-2 py-0.5 text-xs font-semibold text-sky-800">@Model.SentCount</span>
                     </a>
                     <a asp-controller="Mail" asp-action="Index" asp-route-status="delivered"
                        class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100">
                         <span>Livré</span>
-                        <span class="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">@Model.DeliveredCount</span>
+                        <span class="rounded-full  px-2 py-0.5 text-xs font-semibold text-emerald-800">@Model.DeliveredCount</span>
                     </a>
                 </nav>
             </div>
@@ -86,8 +86,8 @@
             <!-- Header -->
             <div class="mb-6 flex items-center justify-between rounded-lg bg-white p-4 shadow-sm">
                 <div>
-                    <h2 class="text-2xl font-semibold text-slate-900">@greeting, @Model.FirstName 👋</h2>
-                    <p class="mt-0.5 text-sm text-slate-500">Voici un résumé de votre activité courrier.</p>
+                    <h2 class="text-2xl font-semibold text-slate-900">@Model.FirstName @Model.LastName</h2>
+                    @* <p class="mt-0.5 text-sm text-slate-500">Voici un résumé de votre activité courrier.</p> *@
                 </div>
                 <a asp-controller="Mail" asp-action="Create"
                    class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">
@@ -105,21 +105,21 @@
                 </div>
 
                 <!-- En attente -->
-                <div class="rounded-lg border border-amber-200 bg-amber-50 p-4 shadow-sm">
+                <div class="rounded-sm border border-amber-200 bg-amber-10 p-4 shadow-sm">
                     <p class="text-xs font-semibold uppercase tracking-wide text-amber-600">En attente</p>
                     <p class="mt-2 text-3xl font-bold text-amber-700">@Model.PendingCount</p>
                     <p class="mt-1 text-xs text-amber-500">à traiter</p>
                 </div>
 
                 <!-- Envoyés -->
-                <div class="rounded-lg border border-sky-200 bg-sky-50 p-4 shadow-sm">
+                <div class="rounded-lg border border-sky-200 bg-sky-10 p-4 shadow-sm">
                     <p class="text-xs font-semibold uppercase tracking-wide text-sky-600">En transit</p>
                     <p class="mt-2 text-3xl font-bold text-sky-700">@Model.SentCount</p>
                     <p class="mt-1 text-xs text-sky-500">en cours d'acheminement</p>
                 </div>
 
                 <!-- Livrés -->
-                <div class="rounded-lg border border-emerald-200 bg-emerald-50 p-4 shadow-sm">
+                <div class="rounded-lg border border-emerald-200 bg-emerald-10 p-4 shadow-sm">
                     <p class="text-xs font-semibold uppercase tracking-wide text-emerald-600">Livrés</p>
                     <p class="mt-2 text-3xl font-bold text-emerald-700">@Model.DeliveredCount</p>
                     <p class="mt-1 text-xs text-emerald-500">avec succès</p>
@@ -185,7 +185,7 @@
                 </div>
 
                 <!-- Panneau droit : Répartition + Raccourcis (1/3) -->
-                <div class="flex flex-col gap-4">
+                @* <div class="flex flex-col gap-4">
 
                     <!-- Répartition Inbox / Outbox -->
                     <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
@@ -254,7 +254,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> *@
             </div>
 
         </main>
