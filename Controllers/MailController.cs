@@ -33,6 +33,7 @@ public class MailController : Controller
         var mailIds = mails.Select(m => m.Id);
         var inboxMails = mails.Where(m => m.Recipient == userEmail).ToList();
         var outboxMails = mails.Where(m => m.Sender == userEmail).ToList();
+
         var viewModel = new MailIndexViewModel
         {
             CurrentUserEmail = userEmail,
@@ -108,7 +109,7 @@ public class MailController : Controller
 
         await _mailRepository.AddMailAsync(mail);
         await _mailRepository.SaveAsync();
-        mail.Status = "En attente";
+        mail.Status = "Envoyé";
 
         await _historyRepository.AddHistoryAsync(new History
         {

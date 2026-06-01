@@ -27,7 +27,10 @@ public class VehicleController : Controller
         var vehicles = (await _vehicleRepository.GetAllVehicleAsync()).ToList();
 
         foreach (var v in vehicles)
+        {
+            if(v != null)
             await SyncVehicleStateAsync(v);
+        }
 
         return View(vehicles);
     }
@@ -74,13 +77,6 @@ public class VehicleController : Controller
     {
         if (!IsLoggedIn()) return RedirectToAction("Login", "User");
         if (!IsAdmin())    return RedirectToAction("Dashboard", "Mail");
-
-        ModelState.Remove(nameof(vehicle.State));
-        ModelState.Remove(nameof(vehicle.Left));
-        ModelState.Remove(nameof(vehicle.Arrived));
-        ModelState.Remove(nameof(vehicle.Location));
-        ModelState.Remove(nameof(vehicle.MailId));
-
         if (!ModelState.IsValid) return View(vehicle);
 
         vehicle.State   = "Disponible";
@@ -113,12 +109,6 @@ public class VehicleController : Controller
         if (id != vehicle.Id) return NotFound();
         if (!IsLoggedIn()) return RedirectToAction("Login", "User");
         if (!IsAdmin())    return RedirectToAction("Dashboard", "Mail");
-
-        ModelState.Remove(nameof(vehicle.State));
-        ModelState.Remove(nameof(vehicle.Left));
-        ModelState.Remove(nameof(vehicle.Arrived));
-        ModelState.Remove(nameof(vehicle.Location));
-        ModelState.Remove(nameof(vehicle.MailId));
 
         if (!ModelState.IsValid) return View(vehicle);
 

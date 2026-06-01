@@ -114,16 +114,12 @@
                         }
                     </select>
                     <span asp-validation-for="VehicleId" class="text-sm text-red-600"></span>
-@* 
-                    <div id="vehicleScheduleHint" class="hidden mt-2 rounded-xl bg-sky-50 border border-sky-200 px-4 py-2 text-xs text-sky-700">
-                        Départ : <strong id="hintLeft"></strong> — Arrivée prévue : <strong id="hintArrived"></strong>
-                    </div> *@
                 </div>
 
             </div>
 
             <div>
-                <label asp-for="Reference" class="block text-sm font-medium text-slate-700">Sujet</label>
+                <label asp-for="Reference" class="block text-sm font-medium text-slate-700">Objet</label>
                 <input asp-for="Reference"
                        class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500"
                        placeholder="Objet du message" />

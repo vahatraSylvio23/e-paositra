@@ -6,6 +6,7 @@
     var statusFilter = Context.Request.Query["status"].ToString();
     var activeFolder = string.IsNullOrEmpty(folder) ? "outbox" : folder;
     var activeStatus = string.IsNullOrEmpty(statusFilter) ? "" : statusFilter;
+    
     var isAdmin = Context.Session.GetString("UserRole") == "Admin";
 }
 
@@ -67,7 +68,6 @@
                             </a>
                         }                    </nav>
                 </div>
-
             </aside>
 
             <main class="flex-1 p-6">
@@ -87,7 +87,7 @@
                             var statusLabel = activeStatus == "pending" ? "En attente"
                                             : activeStatus == "sent" ? "Envoyé"
                                             : "Livré";
-                            displayMails = Model.InboxMails
+                            displayMails = Model.OutboxMails
                                                 .Where(m => m.StatusLabel == statusLabel)
                                                 .OrderByDescending(m => m.DateSent);
                             sectionTitle = statusLabel;
@@ -98,7 +98,7 @@
                             sectionTitle = "Envoyes";
                         }
                     }
-                        <div class="mb-6 rounded-lg bg-white p-4 shadow-sm">
+                        @* <div class="mb-6 rounded-lg bg-white p-4 shadow-sm">
                             <div class="relative">
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                     <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -111,7 +111,7 @@
                                     class="block w-full rounded-lg border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-3 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-900 focus:bg-white focus:outline-none focus:ring-1 focus:ring-slate-900"
                                     placeholder="Recherche" />
                             </div>
-                        </div>
+                        </div> *@
 
                     <div class="mb-3 flex items-center gap-2 border-b border-slate-200 pb-3">
                         <span class="text-sm font-semibold text-slate-700">@sectionTitle</span>
