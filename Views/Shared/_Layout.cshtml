@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="min-h-screen bg-slate-50 text-slate-900 ">
 
 <head>
     <meta charset="utf-8" />
@@ -7,27 +7,37 @@
     <title>@ViewData["Title"] - e_paositra</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="~/e_paositra.styles.css" asp-append-version="true" />
 </head>
 
-<body class="min-h-screen bg-slate-50 text-slate-900">
+<body class="min-h-full flex flex-col bg-slate-50 text-slate-900 ">
     @{
         var userId = Context.Session.GetInt32("UserId");
         var isLoggedIn = userId.HasValue;
     }
 
-    <header class="border-b border-slate-200 bg-white shadow-sm">
+    <header class="border-b border-slate-200 bg-white shadow-sm flex-none">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
             <a class="text-lg font-semibold text-slate-900" asp-area="" asp-controller="Mail"
-               asp-action="Index">e_paositra</a>
+               asp-action="Dashboard">e_paositra</a>
             <nav class="flex items-center gap-4 text-sm font-medium text-slate-700">
                 @if (isLoggedIn)
                 {
                     <a class="hover:text-slate-900" asp-area="" asp-controller="User" asp-action="Modify">Profil</a>
-                    <a class="hover:text-slate-900" asp-area="" asp-controller="Mail" asp-action="Index">Courrier</a>
+                    <a class="hover:text-slate-900" asp-area="" asp-controller="Mail" asp-action="Dashboard">Courrier</a>
+                    <form asp-controller="User" asp-action="Logout" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit"
+                                class=" cursor-pointer flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900 ">
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor ">
+                                <path d="M16 13v-2H7V8l-5 4 5 4v-3h9zm4-9H12v2h8v14h-8v2h10V4z"/>
+                            </svg>
+                            Déconnexion
+                        </button>
+                    </form>
                     <form asp-controller="User" asp-action="Logout" method="post" class="inline">
                         @Html.AntiForgeryToken()
-                        @* <button type="submit" class="hover:text-slate-900">Logout</button> *@
                     </form>
                 }
                 else
@@ -40,11 +50,11 @@
         </div>
     </header>
 
-    <main>
+    <main class="flex-grow ">
         @RenderBody()
     </main>
 
-    <footer class="border-t border-slate-200 bg-white py-6">
+    <footer class="flex-none border-t border-slate-200 bg-white py-6">
         <div class="mx-auto max-w-7xl px-4 text-sm text-slate-600 sm:px-6 lg:px-8">
             &copy; 2026 - e_paositra - <a class="text-slate-700 hover:text-slate-900" asp-area="" asp-controller="Home"
                                           asp-action="Privacy">Privacy</a>

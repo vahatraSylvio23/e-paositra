@@ -112,7 +112,6 @@
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/scopedcss/bundle/e-paositra.styles.css
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/scopedcss/projectbundle/e-paositra.bundle.scp.css
-/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/compressed/9f90cqxj3j-{0}-61n19gt1b8-61n19gt1b8.gz
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/compressed/lb0csny8l9-{0}-fr7q2aak1r-fr7q2aak1r.gz
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/compressed/diqsv3iqrt-{0}-bqjiyaj88i-bqjiyaj88i.gz
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/compressed/b1f3pvuoms-{0}-c2jlpeoesf-c2jlpeoesf.gz
@@ -192,7 +191,6 @@
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/bin/Debug/net10.0/package-lock.json
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/bin/Debug/net10.0/package.json
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/bin/Debug/net10.0/agence_paositra_malagasy_1.json
-/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/compressed/yutul45989-{0}-0ro1n6207i-0ro1n6207i.gz
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/bin/Debug/net10.0/agence_paositra_malagasy_1.json
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/bin/Debug/net10.0/appsettings.Development.json
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/bin/Debug/net10.0/appsettings.json
@@ -388,3 +386,5 @@
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/obj/Debug/net10.0/e-paositra.pdb
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/obj/Debug/net10.0/e-paositra.genruntimeconfig.cache
 /home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/obj/Debug/net10.0/ref/e-paositra.dll
+/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/compressed/9f90cqxj3j-{0}-49fguani9n-49fguani9n.gz
+/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/Debug/net10.0/compressed/yutul45989-{0}-9ocltocvo0-9ocltocvo0.gz

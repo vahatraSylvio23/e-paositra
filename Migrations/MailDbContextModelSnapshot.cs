@@ -76,12 +76,6 @@ namespace e_paositra.Migrations
                     b.Property<string>("EndAgency")
                         .HasColumnType("text");
 
-                    b.Property<int>("MailStatusId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MailTypeId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Observation")
                         .HasColumnType("text");
 
@@ -97,80 +91,21 @@ namespace e_paositra.Migrations
                     b.Property<string>("Sender")
                         .HasColumnType("text");
 
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("StartAgency")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("MailTypeId");
-
-                    b.ToTable("Mails");
-                });
-
-            modelBuilder.Entity("e_paositra.Models.MailStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("MailId")
-                        .HasColumnType("integer");
+                    b.Property<string>("Status")
+                        .HasColumnType("text");
 
                     b.Property<string>("Type")
                         .HasColumnType("text");
 
-                    b.Property<string>("status")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MailId");
-
-                    b.ToTable("MailStatuses");
-                });
-
-            modelBuilder.Entity("e_paositra.Models.MailType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("VehicleId")
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("BasePrice")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.ToTable("MailTypes");
-                });
-
-            modelBuilder.Entity("e_paositra.Models.Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Services");
+                    b.ToTable("Mails");
                 });
 
             modelBuilder.Entity("e_paositra.Models.User", b =>
@@ -207,36 +142,39 @@ namespace e_paositra.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("e_paositra.Models.Mail", b =>
+            modelBuilder.Entity("e_paositra.Models.Vehicle", b =>
                 {
-                    b.HasOne("e_paositra.Models.MailType", "MailType")
-                        .WithMany("Mails")
-                        .HasForeignKey("MailTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
 
-                    b.Navigation("MailType");
-                });
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-            modelBuilder.Entity("e_paositra.Models.MailStatus", b =>
-                {
-                    b.HasOne("e_paositra.Models.Mail", "Mail")
-                        .WithMany("MailStatuses")
-                        .HasForeignKey("MailId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<DateTime>("Arrived")
+                        .HasColumnType("timestamp with time zone");
 
-                    b.Navigation("Mail");
-                });
+                    b.Property<string>("Driver")
+                        .HasColumnType("text");
 
-            modelBuilder.Entity("e_paositra.Models.Mail", b =>
-                {
-                    b.Navigation("MailStatuses");
-                });
+                    b.Property<DateTime>("Left")
+                        .HasColumnType("timestamp with time zone");
 
-            modelBuilder.Entity("e_paositra.Models.MailType", b =>
-                {
-                    b.Navigation("Mails");
+                    b.Property<string>("LicensePlate")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("text");
+
+                    b.Property<int>("MailId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("State")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vehicles");
                 });
 #pragma warning restore 612, 618
         }

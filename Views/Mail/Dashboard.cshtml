@@ -4,12 +4,12 @@
     ViewData["Title"] = "Tableau de bord";
     var hour = DateTime.Now.Hour;
     var greeting = hour < 12 ? "Bonjour" : hour < 18 ? "Bon après-midi" : "Bonsoir";
+    var isAdmin = Context.Session.GetString("UserRole") == "Admin";
 }
 
 <div class="min-h-screen bg-slate-100 text-slate-900">
     <div class="mx-auto flex min-h-screen max-w-7xl">
 
-        <!-- Sidebar (identique à Index) -->
         <aside class="flex w-64 flex-col justify-between border-r border-slate-200 bg-white p-4">
             <div>
                 <div class="mb-4 border-b border-slate-200 pb-4">
@@ -33,19 +33,6 @@
                         Tableau de bord
                     </a>
 
-                    @* <!-- Dossiers -->
-                    <p class="px-3 pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Dossiers</p>
-                    <a asp-controller="Mail" asp-action="Index"
-                       class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100">
-                        <span>Reçus</span>
-                        <span class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold">@Model.InboxCount</span>
-                    </a>
-                    <a asp-controller="Mail" asp-action="Index" asp-route-folder="outbox"
-                       class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100">
-                        <span>Envoyés</span>
-                        <span class="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-semibold">@Model.OutboxCount</span>
-                    </a> *@
-
                     <p class="px-3 pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Par statut</p>
                     <a asp-controller="Mail" asp-action="Index" asp-route-status="pending"
                        class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100">
@@ -60,65 +47,66 @@
                     <a asp-controller="Mail" asp-action="Index" asp-route-status="delivered"
                        class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100">
                         <span>Livré</span>
-                        <span class="rounded-full  px-2 py-0.5 text-xs font-semibold text-emerald-800">@Model.DeliveredCount</span>
+                        <span class="rounded-full px-2 py-0.5 text-xs font-semibold text-emerald-800">@Model.DeliveredCount</span>
                     </a>
+
+                    @if (isAdmin)
+                    {
+                        <p class="px-3 pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">Administration</p>
+                        <a asp-controller="Vehicle" asp-action="Index"
+                           class="flex items-center gap-2 rounded-lg px-3 py-2 text-slate-900 hover:bg-slate-100">
+                            <svg class="h-4 w-4 text-slate-500" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM19 17H5v-5h14v5z"/>
+                                <circle cx="7.5" cy="14.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/>
+                            </svg>
+                            Véhicules
+                        </a>
+                    }
                 </nav>
             </div>
 
-            <!-- Logout -->
             <div class="border-t border-slate-200 pt-4">
-                <form asp-controller="User" asp-action="Logout" method="post">
-                    @Html.AntiForgeryToken()
-                    <button type="submit"
-                            class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 hover:text-slate-900">
-                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M16 13v-2H7V8l-5 4 5 4v-3h9zm4-9H12v2h8v14h-8v2h10V4z"/>
-                        </svg>
-                        Déconnexion
-                    </button>
-                </form>
+
             </div>
         </aside>
 
-        <!-- Main content -->
         <main class="flex-1 p-6">
 
-            <!-- Header -->
             <div class="mb-6 flex items-center justify-between rounded-lg bg-white p-4 shadow-sm">
                 <div>
                     <h2 class="text-2xl font-semibold text-slate-900">@Model.FirstName @Model.LastName</h2>
-                    @* <p class="mt-0.5 text-sm text-slate-500">Voici un résumé de votre activité courrier.</p> *@
                 </div>
-                <a asp-controller="Mail" asp-action="Create"
-                   class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">
-                    Nouveau courrier
-                </a>
+                <div class="flex items-center gap-3">
+                    @if (isAdmin)
+                    {
+                        <a asp-controller="Vehicle" asp-action="Index"
+                           class="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50">
+                            Gérer les véhicules
+                        </a>
+                    }
+                    <a asp-controller="Mail" asp-action="Create"
+                       class="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">
+                        Nouveau courrier
+                    </a>
+                </div>
             </div>
 
-            <!-- KPI Cards -->
             <div class="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-                <!-- Total -->
                 <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
                     <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Total</p>
                     <p class="mt-2 text-3xl font-bold text-slate-900">@(Model.InboxCount + Model.OutboxCount)</p>
                     <p class="mt-1 text-xs text-slate-500">courriers au total</p>
                 </div>
-
-                <!-- En attente -->
                 <div class="rounded-sm border border-amber-200 bg-amber-10 p-4 shadow-sm">
                     <p class="text-xs font-semibold uppercase tracking-wide text-amber-600">En attente</p>
                     <p class="mt-2 text-3xl font-bold text-amber-700">@Model.PendingCount</p>
                     <p class="mt-1 text-xs text-amber-500">à traiter</p>
                 </div>
-
-                <!-- Envoyés -->
                 <div class="rounded-lg border border-sky-200 bg-sky-10 p-4 shadow-sm">
                     <p class="text-xs font-semibold uppercase tracking-wide text-sky-600">En transit</p>
                     <p class="mt-2 text-3xl font-bold text-sky-700">@Model.SentCount</p>
                     <p class="mt-1 text-xs text-sky-500">en cours d'acheminement</p>
                 </div>
-
-                <!-- Livrés -->
                 <div class="rounded-lg border border-emerald-200 bg-emerald-10 p-4 shadow-sm">
                     <p class="text-xs font-semibold uppercase tracking-wide text-emerald-600">Livrés</p>
                     <p class="mt-2 text-3xl font-bold text-emerald-700">@Model.DeliveredCount</p>
@@ -126,15 +114,12 @@
                 </div>
             </div>
 
-            <!-- Deux colonnes : Récents + Raccourcis -->
             <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-
-                <!-- Activité récente (2/3) -->
                 <div class="lg:col-span-2">
                     <div class="rounded-lg border border-slate-200 bg-white shadow-sm">
                         <div class="flex items-center justify-between border-b border-slate-100 px-4 py-3">
                             <h3 class="text-sm font-semibold text-slate-700">Activité récente</h3>
-                            <a asp-controller="Mail" asp-action="Index"
+                            <a asp-controller="Mail" asp-action="Index" asp-route-folder="outbox"
                                class="text-xs font-medium text-slate-500 hover:text-slate-900 hover:underline">Voir tout</a>
                         </div>
 
@@ -183,80 +168,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Panneau droit : Répartition + Raccourcis (1/3) -->
-                @* <div class="flex flex-col gap-4">
-
-                    <!-- Répartition Inbox / Outbox -->
-                    <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-                        <h3 class="mb-3 text-sm font-semibold text-slate-700">Répartition</h3>
-                        <div class="space-y-3">
-                            <!-- Reçus -->
-                            <div>
-                                <div class="mb-1 flex justify-between text-xs text-slate-500">
-                                    <span>Reçus</span>
-                                    <span class="font-semibold text-slate-700">@Model.InboxCount</span>
-                                </div>
-                                @{
-                                    var total = Model.InboxCount + Model.OutboxCount;
-                                    var inboxPct = total > 0 ? (int)Math.Round((double)Model.InboxCount / total * 100) : 0;
-                                    var outboxPct = total > 0 ? 100 - inboxPct : 0;
-                                }
-                                <div class="h-2 w-full overflow-hidden rounded-full bg-slate-100">
-                                    <div class="h-2 rounded-full bg-slate-700 transition-all" style="width: @inboxPct%"></div>
-                                </div>
-                            </div>
-                            <!-- Envoyés -->
-                            <div>
-                                <div class="mb-1 flex justify-between text-xs text-slate-500">
-                                    <span>Envoyés</span>
-                                    <span class="font-semibold text-slate-700">@Model.OutboxCount</span>
-                                </div>
-                                <div class="h-2 w-full overflow-hidden rounded-full bg-slate-100">
-                                    <div class="h-2 rounded-full bg-sky-400 transition-all" style="width: @outboxPct%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Raccourcis rapides -->
-                    <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-                        <h3 class="mb-3 text-sm font-semibold text-slate-700">Raccourcis</h3>
-                        <div class="space-y-2">
-                            <a asp-controller="Mail" asp-action="Create"
-                               class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 transition">
-                                <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
-                                </svg>
-                                Nouveau courrier
-                            </a>
-                            <a asp-controller="Mail" asp-action="Index"
-                               class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 transition">
-                                <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                                </svg>
-                                Boîte de réception
-                            </a>
-                            <a asp-controller="Mail" asp-action="Index" asp-route-folder="outbox"
-                               class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 transition">
-                                <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-                                </svg>
-                                Courriers envoyés
-                            </a>
-                            <a asp-controller="User" asp-action="Modify"
-                               class="flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 transition">
-                                <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                                </svg>
-                                Mon profil
-                            </a>
-                        </div>
-                    </div>
-
-                </div> *@
             </div>
-
         </main>
     </div>
 </div>

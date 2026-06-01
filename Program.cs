@@ -18,8 +18,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMailRepository, MailRepository>();
 builder.Services.AddScoped<IHistoryRepository, HistoryRepository>();
-builder.Services.AddScoped<IMailStatusRepository, MailStatusRepository>();
-builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddSingleton(new e_paositra.Services.AgencyService(Path.Combine(builder.Environment.ContentRootPath, "agence_paositra_malagasy_1.json")));
 
 var app = builder.Build();

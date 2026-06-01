@@ -16,6 +16,6 @@ public class RegisterViewModel
     public string? Password { get; set; }
     [Required(ErrorMessage = "Le numéro de téléphone est requis.")]
     public string? PhoneNumber { get; set; }
-    // [Required(ErrorMessage = "Le rôle est requis.")]
-    // public string? Role { get; set; }
+     [Required(ErrorMessage = "Le rôle est requis.")]
+     public string? Role { get; set; }
 }

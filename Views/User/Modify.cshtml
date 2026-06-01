@@ -7,13 +7,11 @@
 <div class="flex min-h-screen items-center justify-center bg-slate-100 px-4 py-10">
     <div class="w-full max-w-lg">
 
-        <!-- En-tête -->
         <div class="mb-6 text-center">
             <h1 class="text-2xl font-semibold text-slate-900">e_paositra</h1>
             <p class="mt-1 text-sm text-slate-500">Modifiez votre profil</p>
         </div>
 
-        <!-- Carte -->
         <div class="rounded-lg border border-slate-200 bg-white p-8 shadow-sm">
 
             @if (!ViewData.ModelState.IsValid)
@@ -25,7 +23,6 @@
             <form asp-action="Modify" method="post" class="space-y-4">
                 @Html.AntiForgeryToken()
 
-                <!-- Prénom / Nom -->
                 <div class="grid gap-4 sm:grid-cols-2">
                     <div>
                         <label asp-for="FirstName" class="block text-sm font-medium text-slate-700">Prénom</label>
@@ -41,7 +38,6 @@
                     </div>
                 </div>
 
-                <!-- Email -->
                 <div>
                     <label asp-for="Email" class="block text-sm font-medium text-slate-700">Email</label>
                     <input asp-for="Email" type="email" autocomplete="email"
@@ -49,7 +45,6 @@
                     <span asp-validation-for="Email" class="mt-1 block text-xs text-red-600"></span>
                 </div>
 
-                <!-- Mot de passe -->
                 <div>
                     <label asp-for="Password" class="block text-sm font-medium text-slate-700">
                         Mot de passe
@@ -63,17 +58,21 @@
                     <span asp-validation-for="Password" class="mt-1 block text-xs text-red-600"></span>
                 </div>
 
-                <!-- Téléphone -->
                 <div>
                     <label asp-for="PhoneNumber" class="block text-sm font-medium text-slate-700">Téléphone</label>
                     <input asp-for="PhoneNumber" type="tel" autocomplete="tel"
                            class="mt-1 block w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500" />
                     <span asp-validation-for="PhoneNumber" class="mt-1 block text-xs text-red-600"></span>
                 </div>
-                <button type="submit"
-                        class="mt-2 w-full rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800">
-                    Modifier
-                </button>
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <a asp-controller="Mail" asp-action="Dashboard"
+                    class="mt-2 w-full rounded-lg bg-white-900 px-4 py-2.5 text-sm font-semibold text-black transition">
+                        Retour </a>
+                                <button type="submit"
+                            class="mt-2 w-full rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800">
+                        Modifier
+                    </button>
+                </div>
             </form>
         </div>
 

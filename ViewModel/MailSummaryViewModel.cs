@@ -32,13 +32,11 @@ public class DashboardViewModel
     public string FirstName { get; set; } = string.Empty;
     public string LastName {get ; set; } = string.Empty;
 
-    // Compteurs globaux
     public int InboxCount { get; set; }
     public int OutboxCount { get; set; }
     public int PendingCount { get; set; }
     public int SentCount { get; set; }
     public int DeliveredCount { get; set; }
 
-    // 5 derniers courriers (toutes boîtes confondues)
     public IEnumerable<MailSummaryViewModel> RecentMails { get; set; } = Array.Empty<MailSummaryViewModel>();
 }

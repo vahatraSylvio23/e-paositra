@@ -32,6 +32,10 @@ public class MailRepository : IMailRepository
             .ToListAsync();
     }
 
+    public async Task<Mail?> GetLatestMailAsync()
+    {
+        return await _context.Mails.OrderByDescending(m => m.Id).FirstOrDefaultAsync();
+    }
     public Task UpdateMailAsync(Mail mail)
     {
         _context.Mails.Update(mail);
@@ -48,5 +52,9 @@ public class MailRepository : IMailRepository
     public async Task SaveAsync()
     {
         await _context.SaveChangesAsync();
+    }
+    public async Task<IEnumerable<Mail>> GetMailsByVehicleId(int vehicleId)
+    {
+        return await _context.Mails.Where(m => m.VehicleId == vehicleId).ToListAsync();
     }
 }

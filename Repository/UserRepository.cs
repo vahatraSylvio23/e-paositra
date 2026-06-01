@@ -36,14 +36,12 @@ public class UserRepository : IUserRepository
         if (user == null || string.IsNullOrWhiteSpace(user.Password))
             return null;
 
-        // Mot de passe BCrypt (commence par $2a$ ou $2b$)
         bool isBcrypt = user.Password.StartsWith("$2a$") || user.Password.StartsWith("$2b$");
 
         bool passwordValid = isBcrypt
             ? BCrypt.Net.BCrypt.Verify(password, user.Password)
-            : user.Password == password; // mot de passe en clair (legacy)
+            : user.Password == password; 
 
-        // Migration automatique : on re-hashe si le mot de passe était en clair
         if (passwordValid && !isBcrypt)
         {
             user.Password = BCrypt.Net.BCrypt.HashPassword(password);

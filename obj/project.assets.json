@@ -2215,11 +2215,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/e-paositra.csproj",
+      "projectUniqueName": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/e-paositra.csproj",
       "projectName": "e-paositra",
-      "projectPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/e-paositra.csproj",
+      "projectPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/e-paositra.csproj",
       "packagesPath": "/home/vahatra/.nuget/packages/",
-      "outputPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra (Copy)/obj/",
+      "outputPath": "/home/vahatra/Documents/L3-MIT-2025-2026/Csharp/project/e-paositra/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/vahatra/.nuget/NuGet/NuGet.Config"
@@ -2301,7 +2301,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.107/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.108/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

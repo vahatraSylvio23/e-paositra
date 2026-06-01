@@ -15,16 +15,15 @@ public class AgencyService
     public List<Agency> GetAllAgencies()
     {
         if (!File.Exists(_jsonPath)) return new List<Agency>();
-
         try
         {
             var content = File.ReadAllText(_jsonPath);
             var agencies = JsonSerializer.Deserialize<List<Agency>>(content);
-            return agencies?.OrderBy(a => a.Name).ToList() ?? new List<Agency>();
+            return agencies?.OrderBy(a =>a.Name).ToList() ?? new List<Agency>();
         }
         catch
         {
-            return new List<Agency>();
+        return new List<Agency>();    
         }
     }
 }

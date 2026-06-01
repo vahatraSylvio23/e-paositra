@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Détails du courrier";
-    var currentStatus = ViewBag.CurrentStatus as string ?? "En attente";
+    var currentStatus = Model.Status as string ?? "En attente";
 }
 
 <div class="container mx-auto px-4 py-10">
@@ -16,7 +16,7 @@
             <h1 class="text-3xl font-semibold text-slate-900">@Model.Reference</h1>
             <div class="mt-4 space-y-3 text-sm text-slate-600">
                 <div><strong>De :</strong> @Model.Sender</div>
-                <div><strong>Code Postal :</strong> @Model.PostalCode</div>
+                @* <div><strong>Code Postal :</strong> @Model.PostalCode</div> *@
                 <div><strong>Adresse d'envoi :</strong> @Model.Address</div>
                 <div><strong>Envoyé le :</strong> @Model.DateSent.ToString("dd MMM yyyy HH:mm")</div>
                 <div><strong>Prévu/Livré le :</strong> @Model.DateReceived.ToString("dd MMM yyyy HH:mm")</div>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="mt-8 flex flex-wrap gap-3">
-                <a asp-action="Delete" asp-route-id="@Model.Id" class="inline-flex items-center justify-center rounded-full bg-red-600 px-6 py-3 text-sm font-semibold text-white hover:bg-red-500">Supprimer</a>
+                <a asp-action="Delete" asp-route-id="@Model.Id" class="inline-flex items-center justify-center rounded-full bg-white-600 px-6 py-3 text-sm font-semibold text-red hover:bg-red-600">Supprimer</a>
                 <a asp-action="Dashboard" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50">Retour</a>
             </div>
         </section>

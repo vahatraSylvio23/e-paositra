@@ -8,17 +8,14 @@ public class Mail
     public string? Recipient { get; set; }
     public string? PostalCode { get; set; }
     public string? Address { get; set; }
-    public int MailTypeId { get; set; }
-    public MailType? MailType { get; set; }
-    public int MailStatusId { get; set; }
+    public string? Type {get; set;}
+    public string? Status { get; set; }
     public DateTime DateSent { get; set; }
     public DateTime DateReceived { get; set; }
-    public int ServiceId { get; set; }
     public string? StartAgency { get; set; }
     public string? EndAgency { get; set; }
     public double? Distance { get; set; }
     public string? Duration { get; set; }
-
+    public int VehicleId{get; set; }
     public string? Observation { get; set; }
-    public ICollection<MailStatus>? MailStatuses { get; set; }
 }

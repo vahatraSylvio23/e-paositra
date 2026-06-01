@@ -11,35 +11,40 @@
                 <p class="text-sm text-slate-500">Nouvelle composition</p>
                 <h1 class="text-3xl font-semibold text-slate-900">Envoyer un message</h1>
             </div>
-            <a asp-action="Index" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50">Retour à la boîte</a>
+            <a asp-action="Index"
+               class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-50">
+                Retour à la boîte
+            </a>
         </div>
 
         <form asp-action="Create" method="post" class="space-y-6">
+            @Html.AntiForgeryToken()
+
             <div class="grid gap-6 lg:grid-cols-2">
-                <!-- Expéditeur -->
+
                 <div>
                     <label class="block text-sm font-medium text-slate-700">De</label>
-                    <input asp-for="Sender" readonly class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-100 px-4 py-3 text-slate-900 focus:outline-none" />
+                    <input asp-for="Sender" readonly
+                           class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-100 px-4 py-3 text-slate-900 focus:outline-none" />
                 </div>
 
-                <!-- Type de courrier -->
                 <div>
-                    <label asp-for="MailTypeId" class="block text-sm font-medium text-slate-700">Type de courrier</label>
-                    <select asp-for="MailTypeId" class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500">
-                        <option value="1">Lettre</option>
-                        <option value="2">Colis</option>
-                        <option value="3">Recommandé</option>
-                        <option value="4">Express</option>
+                    <label asp-for="Type" class="block text-sm font-medium text-slate-700">Type de courrier</label>
+                    <select asp-for="Type"
+                            class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500">
+                        <option value="Lettre">Lettre</option>
+                        <option value="Colis">Colis</option>
+                        <option value="Recommandé">Recommandé</option>
+                        <option value="Express">Express</option>
                     </select>
-                    <span asp-validation-for="MailTypeId" class="text-sm text-red-600"></span>
+                    <span asp-validation-for="Type" class="text-sm text-red-600"></span>
                 </div>
 
-                <!-- Bureau de départ (Paositra) -->
                 <div>
                     <label asp-for="StartAgency" class="block text-sm font-medium text-slate-700">Bureau de départ (Paositra)</label>
-                    <select asp-for="StartAgency" id="startAgency" 
+                    <select asp-for="StartAgency" id="startAgency"
                             class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500" required>
-                        <option value="">-- Sélectionner le bureau de départ --</option>
+                        <option value="">Sélectionner le bureau de départ</option>
                         @if (ViewBag.Agencies != null)
                         {
                             foreach (var agency in (List<e_paositra.Models.Agency>)ViewBag.Agencies)
@@ -50,12 +55,11 @@
                     </select>
                 </div>
 
-                <!-- Bureau de destination (Paositra) -->
                 <div>
                     <label asp-for="EndAgency" class="block text-sm font-medium text-slate-700">Bureau de destination (Paositra)</label>
-                    <select asp-for="EndAgency" id="endAgency" 
+                    <select asp-for="EndAgency" id="endAgency"
                             class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500" required>
-                        <option value="">-- Sélectionner le bureau de destination --</option>
+                        <option value="">Sélectionner le bureau de destination</option>
                         @if (ViewBag.Agencies != null)
                         {
                             foreach (var agency in (List<e_paositra.Models.Agency>)ViewBag.Agencies)
@@ -69,11 +73,11 @@
                 <input type="hidden" asp-for="Distance" id="hiddenDistance" />
                 <input type="hidden" asp-for="Duration" id="hiddenDuration" />
 
-                <!-- Zone d'affichage de la distance et de la durée -->
                 <div class="lg:col-span-2 hidden" id="distanceResultContainer">
                     <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 p-4 rounded-xl text-slate-700 text-sm">
                         <svg class="h-5 w-5 text-slate-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <div class="flex gap-x-6">
                             <span>Distance routière : <strong id="calculatedDistance" class="font-extrabold text-slate-900 text-base">0</strong> km</span>
@@ -82,38 +86,67 @@
                     </div>
                 </div>
 
-                <!-- Code Postal -->
-                <div>
-                    <label asp-for="PostalCode" class="block text-sm font-medium text-slate-700">Code Postal</label>
-                    <input asp-for="PostalCode" type="text" class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500" placeholder="ex: 101" required />
-                    <span asp-validation-for="PostalCode" class="text-sm text-red-600"></span>
-                </div>
-
-                <!-- Adresse d'envoi -->
                 <div>
                     <label asp-for="Address" class="block text-sm font-medium text-slate-700">Adresse d'envoi</label>
-                    <input asp-for="Address" type="text" class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500" placeholder="ex: Lot II M 45 Andraharo" required />
+                    <input asp-for="Address" type="text" placeholder="ex: Lot II M 45 Andraharo"
+                           class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500" required />
                     <span asp-validation-for="Address" class="text-sm text-red-600"></span>
                 </div>
+
+                <div>
+                    <label asp-for="VehicleId" class="block text-sm font-medium text-slate-700">Véhicule de transport</label>
+                    <select asp-for="VehicleId" id="vehicleSelect"
+                            class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500" required>
+                        <option value="">-- Sélectionner un véhicule --</option>
+                        @if (ViewBag.Vehicles != null)
+                        {
+                            foreach (var vehicle in (IEnumerable<e_paositra.Models.Vehicle>)ViewBag.Vehicles)
+                            {
+                                var label = $"{vehicle.LicensePlate} — {vehicle.Driver ?? "sans conducteur"} ({vehicle.State ?? "N/A"})";
+                                var departureStr = vehicle.Left.ToString("dd MMM HH:mm");
+                                var arrivalStr   = vehicle.Arrived.ToString("dd MMM HH:mm");
+                                <option value="@vehicle.Id"
+                                        data-left="@vehicle.Left.ToString("o")"
+                                        data-arrived="@vehicle.Arrived.ToString("o")">
+                                    @label · 
+                                </option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="VehicleId" class="text-sm text-red-600"></span>
+@* 
+                    <div id="vehicleScheduleHint" class="hidden mt-2 rounded-xl bg-sky-50 border border-sky-200 px-4 py-2 text-xs text-sky-700">
+                        Départ : <strong id="hintLeft"></strong> — Arrivée prévue : <strong id="hintArrived"></strong>
+                    </div> *@
+                </div>
+
             </div>
 
-            <!-- Sujet -->
             <div>
                 <label asp-for="Reference" class="block text-sm font-medium text-slate-700">Sujet</label>
-                <input asp-for="Reference" class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500" placeholder="Objet du message" />
+                <input asp-for="Reference"
+                       class="mt-1 block w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500"
+                       placeholder="Objet du message" />
                 <span asp-validation-for="Reference" class="text-sm text-red-600"></span>
             </div>
 
-            <!-- Message -->
             <div>
                 <label asp-for="Observation" class="block text-sm font-medium text-slate-700">Message</label>
-                <textarea asp-for="Observation" rows="8" class="mt-1 block w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500" placeholder="Écrivez votre message ici..."></textarea>
+                <textarea asp-for="Observation" rows="8"
+                          class="mt-1 block w-full rounded-3xl border border-slate-300 bg-slate-50 px-4 py-3 text-slate-900 focus:border-blue-500 focus:ring-blue-500"
+                          placeholder="Écrivez votre message ici..."></textarea>
                 <span asp-validation-for="Observation" class="text-sm text-red-600"></span>
             </div>
 
             <div class="flex flex-col gap-3 sm:flex-row sm:justify-end">
-                <a asp-action="Index" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50">Annuler</a>
-                <button type="submit" class="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800">Envoyer</button>
+                <a asp-action="Index"
+                   class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-50">
+                    Annuler
+                </a>
+                <button type="submit"
+                        class="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800">
+                    Envoyer
+                </button>
             </div>
         </form>
     </div>
@@ -122,23 +155,20 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+
             function checkAndCalculateDistance() {
                 var start = $('#startAgency').val();
-                var end = $('#endAgency').val();
-                
+                var end   = $('#endAgency').val();
+
                 if (start && end) {
-                    // Remplir automatiquement l'adresse d'envoi avec le bureau de destination
                     $('#Address').val(end);
 
                     $.ajax({
                         url: '@Url.Action("CalculateDistance", "Mail")',
                         type: 'POST',
-                        data: {
-                            startAgency: start,
-                            endAgency: end
-                        },
-                        success: function(res) {
+                        data: { startAgency: start, endAgency: end },
+                        success: function (res) {
                             if (res.success) {
                                 $('#calculatedDistance').text(res.distance);
                                 $('#calculatedDuration').text(res.duration);
@@ -147,25 +177,43 @@
                                 $('#distanceResultContainer').removeClass('hidden');
                             } else {
                                 $('#distanceResultContainer').addClass('hidden');
-                                $('#hiddenDistance').val('');
-                                $('#hiddenDuration').val('');
+                                $('#hiddenDistance, #hiddenDuration').val('');
                             }
                         },
-                        error: function() {
+                        error: function () {
                             $('#distanceResultContainer').addClass('hidden');
-                            $('#hiddenDistance').val('');
-                            $('#hiddenDuration').val('');
+                            $('#hiddenDistance, #hiddenDuration').val('');
                         }
                     });
                 } else {
                     $('#distanceResultContainer').addClass('hidden');
-                    $('#hiddenDistance').val('');
-                    $('#hiddenDuration').val('');
+                    $('#hiddenDistance, #hiddenDuration').val('');
                 }
             }
 
-            $('#startAgency, #endAgency').on('change input', function() {
+            $('#startAgency, #endAgency').on('change input', function () {
                 checkAndCalculateDistance();
+            });
+
+            function formatDateTime(isoString) {
+                if (!isoString) return '—';
+                var d = new Date(isoString);
+                return d.toLocaleDateString('fr-MG', { day: '2-digit', month: 'short' })
+                    + ' ' + d.toLocaleTimeString('fr-MG', { hour: '2-digit', minute: '2-digit' });
+            }
+
+            $('#vehicleSelect').on('change', function () {
+                var selected = $(this).find('option:selected');
+                var left    = selected.data('left');
+                var arrived = selected.data('arrived');
+
+                if (left && arrived) {
+                    $('#hintLeft').text(formatDateTime(left));
+                    $('#hintArrived').text(formatDateTime(arrived));
+                    $('#vehicleScheduleHint').removeClass('hidden');
+                } else {
+                    $('#vehicleScheduleHint').addClass('hidden');
+                }
             });
         });
     </script>

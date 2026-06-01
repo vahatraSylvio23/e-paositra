@@ -110,6 +110,7 @@ public class UserController : Controller
             Email = model.Email,
             PhoneNumber = model.PhoneNumber,
             Password = BCrypt.Net.BCrypt.HashPassword(model.Password ?? string.Empty),
+            Role = model.Role,
             ServiceId = 1
         };
 
